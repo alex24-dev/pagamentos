@@ -1,51 +1,43 @@
 package br.com.food.pagamentos.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
-import lombok.*;
-
+import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "pagamentos")
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pagamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NonNull
+    @NotNull
     @Positive
     private BigDecimal valor;
-
-    @NotBlank
     @Size(max = 100)
     private String nome;
-
-    @NotBlank
     @Size(max = 19)
-    private  String numero;
-
-    @NotBlank
+    private String numero;
+    @Size(max = 7)
+    private String expiracao;
     @Size(min = 3, max = 3)
     private String codigo;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     private Status status;
-
     @NotNull
-    private Long pedidoId;
-
-    @NonNull
-    private Long formaDePagamentoId;
-
-
+    private Long PedidoId;
+    @NotNull
+    private Long FormaDePagamentoId;
 }
